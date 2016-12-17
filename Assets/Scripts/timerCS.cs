@@ -21,7 +21,7 @@ public class timerCS : MonoBehaviour {
   public scoreScriptNew scoreScript;
   private bool win;
 
-	void Start() {
+	private void Start() {
     Timer = GetComponent<Text>(); 
     Image win_img = GetComponent<Image>(); 
     Image one_min_img = GetComponent<Image>(); 
@@ -32,7 +32,7 @@ public class timerCS : MonoBehaviour {
     roundedtime = 0.0f;
 	}
 	
-	void Update() {
+	private void Update() {
     if(roundedtime < 0) {
       roundedtime = 0;
     }
@@ -51,7 +51,7 @@ public class timerCS : MonoBehaviour {
     }
 	}
 
-  void FixedUpdate() {
+  private void FixedUpdate() {
     timeLeft -= Time.deltaTime;
     roundedtime = (float)System.Math.Round(timeLeft, 0);
     if (roundedtime <= 0) {
@@ -61,7 +61,7 @@ public class timerCS : MonoBehaviour {
     Timer.text = "time left:\n" + displayTime;
   }
 
-  void OneMinLeft() {
+  private void OneMinLeft() {
     if (timeLeft <= 60 && timeLeft > 57) {
       one_min_img.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Lerp(one_min_img.color.a, 1.0f, Time.deltaTime*5));
     }
@@ -70,7 +70,7 @@ public class timerCS : MonoBehaviour {
     }
   }
 
-  void WinLossGUI() {
+  private void WinLossGUI() {
     if (timeLeft <= 0 && win == true) {
       win_img.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Lerp(win_img.color.a, 1.0f, Time.deltaTime*3));
     } 
@@ -92,28 +92,10 @@ public class timerCS : MonoBehaviour {
       PlayerPrefs.SetInt("highscore", highscores);
       PlayerPrefs.SetInt("isnewhighscore", 1);
     }
-    else {
-      // PlayerPrefs.SetInt("isnewhighscore", 0);
-    }
   }
 
   public string FloatToTime (float toConvert, string format){
     switch (format){
-      // case "00.0":
-      //   return string.Format("{0:00}:{1:0}", 
-      //     Mathf.Floor(toConvert) % 60,//seconds
-      //     Mathf.Floor((toConvert*10) % 10));//miliseconds
-      // break;
-      // case "#0.0":
-      //   return string.Format("{0:#0}:{1:0}", 
-      //     Mathf.Floor(toConvert) % 60,//seconds
-      //     Mathf.Floor((toConvert*10) % 10));//miliseconds
-      // break;
-      // case "00.00":
-      //   return string.Format("{0:00}:{1:00}", 
-      //     Mathf.Floor(toConvert) % 60,//seconds
-      //     Mathf.Floor((toConvert*100) % 100));//miliseconds
-      // break;
       case "#0:00":
         return string.Format("{0:#0}:{1:00}",
           Mathf.Floor(toConvert / 60),//minutes

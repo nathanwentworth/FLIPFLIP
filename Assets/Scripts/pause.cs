@@ -9,14 +9,7 @@ public class pause : MonoBehaviour {
 
   public GameObject PauseMenu;
 
-	void Start () {
-	
-	}
-	
-	void Update () {
-	
-	}
-  void IsPaused() {
+  private void IsPaused() {
     if(Input.GetButtonDown("Pause")) {
       if (cursorLocked == false) {
         Cursor.lockState = CursorLockMode.Locked;
@@ -24,7 +17,7 @@ public class pause : MonoBehaviour {
         Cursor.visible = true; 
         isShowing = !isShowing;
         PauseMenu.SetActive(isShowing);
-      }    
+      }
     }
   }
 }

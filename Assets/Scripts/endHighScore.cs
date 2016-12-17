@@ -13,7 +13,7 @@ public class endHighScore : MonoBehaviour {
 
   public timerCS timerScript;
 
-  void Start () {
+  private void Start () {
     Cursor.visible = true;
     Cursor.lockState = CursorLockMode.None;
 
