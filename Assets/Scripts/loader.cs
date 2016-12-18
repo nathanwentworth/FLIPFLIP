@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class loader : MonoBehaviour {
+public class Loader : MonoBehaviour {
 
-  public void LoadMain(string StartPage) {
-    Application.LoadLevel(StartPage);
+  public void LoadScene(string scene) {
+    SceneManager.LoadScene(scene);
   }
-  public void LoadInfo(string InfoScreen) {
-    Application.LoadLevel(InfoScreen);
-  }
-  public void LoadCredits(string Info) {
-    Application.LoadLevel(Info);
-  }
-  public void LoadLevel(string Level1) {
-    Application.LoadLevel(Level1);
-  }
+
   public void Quit() {
     Application.Quit();
   }

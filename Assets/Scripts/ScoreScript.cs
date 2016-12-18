@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class scoreScriptNew : MonoBehaviour {
+public class ScoreScript : MonoBehaviour {
 
   private static int score;
   private static int goal;

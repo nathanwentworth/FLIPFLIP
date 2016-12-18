@@ -11,7 +11,7 @@ public class endHighScore : MonoBehaviour {
   public Text high_score;
   public Text new_high_score;
 
-  public timerCS timerScript;
+  public Timer timerScript;
 
   private void Start () {
     Cursor.visible = true;
@@ -20,10 +20,6 @@ public class endHighScore : MonoBehaviour {
     highscores = PlayerPrefs.GetInt("highscore");
     yourscore = PlayerPrefs.GetInt("yourscore");
     isNewHighScore = PlayerPrefs.GetInt("isnewhighscore");
-
-    your_score = (Text)your_score.GetComponent(typeof(Text));
-    high_score = (Text)high_score.GetComponent(typeof(Text));
-    new_high_score = (Text)new_high_score.GetComponent(typeof(Text));
 
     your_score.text = "Your Score!\n" + yourscore;
     high_score.text = "High Score!\n" + highscores;

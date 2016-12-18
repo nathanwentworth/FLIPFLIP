@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class timerCS : MonoBehaviour {
+public class Timer : MonoBehaviour {
 
-  public Text Timer;
+  private Text timerText;
 
   public Image win_img;
   public Image one_min_img;
@@ -18,22 +19,18 @@ public class timerCS : MonoBehaviour {
 
   private string displayTime;
 
-  public scoreScriptNew scoreScript;
+  public ScoreScript scoreScript;
   private bool win;
 
 	private void Start() {
-    Timer = GetComponent<Text>(); 
-    Image win_img = GetComponent<Image>(); 
-    Image one_min_img = GetComponent<Image>(); 
-    Image game_over_img = GetComponent<Image>(); 
     timeLeft = 120.0f;
-    scoreScriptNew scoreScript = GetComponent<scoreScriptNew>();
     win = scoreScript.ReturnWin();
     roundedtime = 0.0f;
+    timerText = GetComponent<Text>();
 	}
 	
 	private void Update() {
-    if(roundedtime < 0) {
+    if (roundedtime < 0) {
       roundedtime = 0;
     }
 
@@ -44,10 +41,8 @@ public class timerCS : MonoBehaviour {
     OneMinLeft();
     WinLossGUI();
 
-    // PlayerPrefs.SetFloat("Score", score);
-
     if (timeLeft <= -5) {
-      Application.LoadLevel ("EndScreen");
+      SceneManager.LoadScene ("EndScreen");
     }
 	}
 
@@ -57,8 +52,8 @@ public class timerCS : MonoBehaviour {
     if (roundedtime <= 0) {
       roundedtime = 0;
     }
-    displayTime = FloatToTime((float)roundedtime, "#0:00");
-    Timer.text = "time left:\n" + displayTime;
+    displayTime = FloatToTime((float)roundedtime);
+    timerText.text = "time left:\n" + displayTime;
   }
 
   private void OneMinLeft() {
@@ -82,8 +77,7 @@ public class timerCS : MonoBehaviour {
   public void StoreAndSetScores () {
     highscores = PlayerPrefs.GetInt("highscore");
 
-    GameObject cam = GameObject.Find("Score");
-    score = cam.GetComponent<scoreScriptNew>().ReturnScore(); 
+    score = scoreScript.ReturnScore();
 
     PlayerPrefs.SetInt("yourscore", score);
 
@@ -94,14 +88,9 @@ public class timerCS : MonoBehaviour {
     }
   }
 
-  public string FloatToTime (float toConvert, string format){
-    switch (format){
-      case "#0:00":
-        return string.Format("{0:#0}:{1:00}",
-          Mathf.Floor(toConvert / 60),//minutes
-          Mathf.Floor(toConvert) % 60);//seconds
-      break;
-    }
-    return "error";
+  public string FloatToTime (float toConvert){
+    return string.Format("{0:#0}:{1:00}",
+      Mathf.Floor(toConvert / 60),//minutes
+      Mathf.Floor(toConvert) % 60);//seconds
   }
 }

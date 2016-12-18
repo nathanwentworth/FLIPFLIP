@@ -2,14 +2,21 @@
 using System.Collections;
 
 public class armSwing : MonoBehaviour {
-  public Animation armAni;
-  void Start() {
-    armAni = GetComponent<Animation>();
+
+  private AudioSource audio;
+  private Animator animation;
+
+  private void Start() {
+    audio = GetComponent<AudioSource>();
+    animation = GetComponent<Animator>();
   }
-  void Update(){
+
+  private void Update() {
     if(Input.GetButtonDown("Fire1")){
-      GetComponent<AudioSource>().Play();
-      armAni.Play("ArmUp");
+      if (!animation.GetCurrentAnimatorStateInfo(0).IsName("ArmSwing")) {
+        audio.Play();
+      }
+      animation.SetTrigger("Swing");
     }
   }
 }
